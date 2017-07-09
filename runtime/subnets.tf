@@ -1,7 +1,7 @@
-# /16 for VPC, /20 for subnets --> 64 subnets of 1024ish hosts each max
+# /16 for VPC, /22 for subnets --> 64 subnets of 1024ish hosts each max
 
 /******************************************************************************
-Public Subnets across multiple AZs
+Public Subnets
 ******************************************************************************/
 
 resource "aws_subnet" "public_0" {
