@@ -14,6 +14,8 @@ data "aws_availability_zones" "azs" {}
 Create VPC
 ******************************************************************************/
 
+# /16 for VPC, /20 for subnets --> 64 subnets of 1024 hosts each
+
 resource "aws_vpc" "main" {
   cidr_block                       = "${var.vpc_cidr_block}"
   assign_generated_ipv6_cidr_block = true
@@ -47,7 +49,6 @@ Tag auto-generated default Network ACL
 resource "aws_default_network_acl" "default_acl" {
   default_network_acl_id = "${aws_vpc.main.default_network_acl_id}"
 
-  # Allow everything
   ingress {
     from_port  = 0
     to_port    = 0
@@ -57,7 +58,17 @@ resource "aws_default_network_acl" "default_acl" {
     action     = "allow"
   }
 
-  # Allow everything
+  /*
+  ingress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = -1
+    ipv6_cidr_block = "::/0"
+    rule_no         = 101
+    action          = "allow"
+  }
+  */
+
   egress {
     from_port  = 0
     to_port    = 0
@@ -66,6 +77,17 @@ resource "aws_default_network_acl" "default_acl" {
     rule_no    = 100
     action     = "allow"
   }
+
+  /*
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = -1
+    ipv6_cidr_block = "::/0"
+    rule_no         = 101
+    action          = "allow"
+  }
+  */
 
   tags = {
     Name = "${var.basename}_def_acl"
@@ -94,6 +116,15 @@ resource "aws_default_security_group" "default" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  /*
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  */
 
   tags = {
     Name = "${var.basename}_def_sg"

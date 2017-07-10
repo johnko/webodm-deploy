@@ -1,5 +1,3 @@
-# /16 for VPC, /22 for subnets --> 64 subnets of 1024ish hosts each max
-
 /******************************************************************************
 Public Subnets
 ******************************************************************************/
@@ -16,14 +14,14 @@ resource "aws_subnet" "public_0" {
 }
 
 /******************************************************************************
-Create Public Gateway and Route
+Create Public Internet Gateway and Route
 ******************************************************************************/
 
 resource "aws_internet_gateway" "public" {
   vpc_id = "${aws_vpc.main.id}"
 
   tags = {
-    Name = "${var.basename}_pub_gw"
+    Name = "${var.basename}_pub_igw"
   }
 }
 
