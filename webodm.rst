@@ -7,7 +7,7 @@ Installing Stuff
 
 1.  Start the instance and ssh into it.
 
-2.  Install docker (add your user to group 'docker')::
+2.  Install docker::
 
     # Add new repo
     wget -O - https://download.docker.com/linux/$(lsb_release --id --short | tr [A-Z] [a-z])/gpg |\
@@ -18,6 +18,9 @@ Installing Stuff
 
     # Add new package
     sudo apt-get --yes install docker-ce
+
+    # Add 'admin' user to the 'docker' group
+    usermod -a -G docker admin
 
 * https://docs.docker.com/engine/installation/linux/debian/
 * https://docs.docker.com/engine/installation/linux/ubuntu/
@@ -30,15 +33,22 @@ Installing Stuff
 
     git clone https://github.com/OpenDroneMap/WebODM.git --config core.autocrlf=input
 
+* https://www.webodm.org/
+* https://github.com/OpenDroneMap/WebODM
+* https://github.com/OpenDroneMap/OpenDroneMap
+* https://github.com/OpenDroneMap/node-OpenDroneMap
+
 
 Running Stuff
 -------------
 
 1.  Start the instance and ssh into it.
 
-2.  ./webodm.sh start
+2.  Start WebODM::
 
-3.  http://PUBLICIPADDRESSOFINSTANCE:8000
+    ./webodm.sh start
+
+3.  Connect to the web console at http://PUBLICIPADDRESSOFINSTANCE:8000
 
 
 Tweaking Stuff
