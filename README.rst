@@ -19,8 +19,8 @@ Installing Stuff
     # Add new package
     sudo apt-get --yes install docker-ce
 
-    # Add 'admin' user to the 'docker' group
-    usermod -a -G docker admin
+    # Add user to the 'docker' group
+    sudo usermod -a -G docker ${USER}
 
 * https://docs.docker.com/engine/installation/linux/debian/
 * https://docs.docker.com/engine/installation/linux/ubuntu/
