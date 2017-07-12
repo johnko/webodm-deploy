@@ -1,5 +1,5 @@
 /******************************************************************************
-Provider AWS
+Provider
 ******************************************************************************/
 
 provider "aws" {
@@ -11,7 +11,24 @@ provider "aws" {
 data "aws_availability_zones" "azs" {}
 
 /******************************************************************************
-Create VPC
+Terraform State and Locking
+******************************************************************************/
+
+/*
+terraform {
+  backend "s3" {
+    bucket  = "webodm-terraform"
+    key     = "test/vpc/terraform.tfstate"
+    region  = "ca-central-1"
+    encrypt = true
+
+    # dynamodb_table = foo
+  }
+}
+*/
+
+/******************************************************************************
+VPC
 ******************************************************************************/
 
 # /16 for VPC, /20 for subnets --> 64 subnets of 1024 hosts each
@@ -24,7 +41,8 @@ resource "aws_vpc" "main" {
   enable_dns_support               = true
 
   tags = {
-    Name = "${var.basename}_vpc"
+    Name      = "${var.basename}_vpc"
+    Terraform = true
   }
 }
 
@@ -36,7 +54,8 @@ resource "aws_default_route_table" "default_rtb" {
   default_route_table_id = "${aws_vpc.main.default_route_table_id}"
 
   tags = {
-    Name = "${var.basename}_def_rtb"
+    Name      = "${var.basename}_def_rtb"
+    Terraform = true
   }
 }
 
@@ -58,7 +77,7 @@ resource "aws_default_network_acl" "default_acl" {
     action     = "allow"
   }
 
-  /*
+  /* XXX FIXME XXX Re-enable after Terraform 0.10.0
   ingress {
     from_port       = 0
     to_port         = 0
@@ -78,7 +97,7 @@ resource "aws_default_network_acl" "default_acl" {
     action     = "allow"
   }
 
-  /*
+  /* XXX FIXME XXX Re-enable after Terraform 0.10.0
   egress {
     from_port       = 0
     to_port         = 0
@@ -90,7 +109,8 @@ resource "aws_default_network_acl" "default_acl" {
   */
 
   tags = {
-    Name = "${var.basename}_def_acl"
+    Name      = "${var.basename}_def_acl"
+    Terraform = true
   }
 }
 
@@ -125,12 +145,13 @@ resource "aws_default_security_group" "default" {
   }
 
   tags = {
-    Name = "${var.basename}_def_sg"
+    Name      = "${var.basename}_def_sg"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-Create DHCP Options Set
+DHCP Options Set
 ******************************************************************************/
 
 resource "aws_vpc_dhcp_options" "domain_name" {
@@ -138,7 +159,8 @@ resource "aws_vpc_dhcp_options" "domain_name" {
   domain_name_servers = ["AmazonProvidedDNS"]
 
   tags = {
-    Name = "${var.basename}_dopt"
+    Name      = "${var.basename}_dopt"
+    Terraform = true
   }
 }
 

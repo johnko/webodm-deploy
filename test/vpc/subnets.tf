@@ -9,19 +9,21 @@ resource "aws_subnet" "public_0" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.basename}_pub_sub_0"
+    Name      = "${var.basename}_pub_sub_0"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-Create Public Internet Gateway and Route
+Public Internet GW and Route Table
 ******************************************************************************/
 
 resource "aws_internet_gateway" "public" {
   vpc_id = "${aws_vpc.main.id}"
 
   tags = {
-    Name = "${var.basename}_pub_igw"
+    Name      = "${var.basename}_pub_igw"
+    Terraform = true
   }
 }
 
@@ -33,8 +35,14 @@ resource "aws_route_table" "public" {
     gateway_id = "${aws_internet_gateway.public.id}"
   }
 
+  route {
+    ipv6_cidr_block = "::/0"
+    gateway_id      = "${aws_internet_gateway.public.id}"
+  }
+
   tags = {
-    Name = "${var.basename}_pub_rtb"
+    Name      = "${var.basename}_pub_rtb"
+    Terraform = true
   }
 }
 
