@@ -1,6 +1,3 @@
-# XXX FIXME XXX Make sure the tags, names, descriptions and resources
-# all have sensible names
-
 /******************************************************************************
 SSH
 ******************************************************************************/
