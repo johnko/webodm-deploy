@@ -6,7 +6,7 @@
 # instance profile --> "Who am I?"
 
 resource "aws_iam_role" "test_role" {
-  name = "${var.basename}_role"
+  name        = "${var.basename}_role"
   description = "Terraform instance role"
 
   # XXX FIXME XXX Give this a nice path!!!
@@ -68,10 +68,12 @@ EOF
 
 ******************************************************************************/
 
+
 # resource "aws_key_pair" "deploy" {
 #   key_name   = "${var.key_name}"
 #   public_key = "${file(var.public_key_path)}"
 # }
+
 
 # resource "aws_instance" "web" {
 #   # The connection block tells our provisioner how to communicate with the
@@ -109,3 +111,4 @@ EOF
 #     ]
 #   }
 # }
+
