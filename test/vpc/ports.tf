@@ -2,7 +2,7 @@
 # all have sensible names
 
 /******************************************************************************
-
+SSH
 ******************************************************************************/
 
 resource "aws_security_group" "ssh" {
@@ -39,12 +39,13 @@ resource "aws_security_group" "ssh" {
   }
 
   tags = {
-    Name = "${var.basename}_sg_ssh_scp"
+    Name      = "${var.basename}_sg_ssh_scp"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-
+ICMP (ping)
 ******************************************************************************/
 
 resource "aws_security_group" "icmp" {
@@ -53,15 +54,15 @@ resource "aws_security_group" "icmp" {
   description = "Inbound ICMP"
 
   ingress {
-    from_port   = -1
-    to_port     = -1
+    from_port   = 8
+    to_port     = 0
     protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port        = -1
-    to_port          = -1
+    from_port        = 8
+    to_port          = 0
     protocol         = "icmp"
     ipv6_cidr_blocks = ["::/0"]
   }
@@ -81,12 +82,13 @@ resource "aws_security_group" "icmp" {
   }
 
   tags = {
-    Name = "${var.basename}_sg_icmp"
+    Name      = "${var.basename}_sg_icmp"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-
+HTTP
 ******************************************************************************/
 
 resource "aws_security_group" "http" {
@@ -123,12 +125,13 @@ resource "aws_security_group" "http" {
   }
 
   tags = {
-    Name = "${var.basename}_sg_http"
+    Name      = "${var.basename}_sg_http"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-
+HTTP Alternate
 ******************************************************************************/
 
 resource "aws_security_group" "http_alt" {
@@ -165,12 +168,13 @@ resource "aws_security_group" "http_alt" {
   }
 
   tags = {
-    Name = "${var.basename}_sg_http_alt"
+    Name      = "${var.basename}_sg_http_alt"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-
+HTTPS
 ******************************************************************************/
 
 resource "aws_security_group" "https" {
@@ -207,12 +211,13 @@ resource "aws_security_group" "https" {
   }
 
   tags = {
-    Name = "${var.basename}_sg_https"
+    Name      = "${var.basename}_sg_https"
+    Terraform = true
   }
 }
 
 /******************************************************************************
-
+Node Application
 ******************************************************************************/
 
 resource "aws_security_group" "node_app" {
@@ -249,6 +254,7 @@ resource "aws_security_group" "node_app" {
   }
 
   tags = {
-    Name = "${var.basename}_sg_node_app"
+    Name      = "${var.basename}_sg_node_app"
+    Terraform = true
   }
 }
