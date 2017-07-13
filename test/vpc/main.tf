@@ -14,10 +14,9 @@ data "aws_availability_zones" "azs" {}
 Terraform State and Locking
 ******************************************************************************/
 
-/*
 terraform {
   backend "s3" {
-    bucket  = "webodm-terraform"
+    bucket  = "orthos-test-terraform"
     key     = "test/vpc/terraform.tfstate"
     region  = "ca-central-1"
     encrypt = true
@@ -25,7 +24,6 @@ terraform {
     # dynamodb_table = foo
   }
 }
-*/
 
 /******************************************************************************
 VPC
