@@ -36,8 +36,8 @@ resource "aws_security_group" "ssh" {
   }
 
   tags = {
-    Name      = "${var.basename}_sg_ssh_scp"
-    Terraform = true
+    Name       = "${var.basename}_sg_ssh_scp"
+    Managed_By = "terraform"
   }
 }
 
@@ -79,8 +79,8 @@ resource "aws_security_group" "icmp" {
   }
 
   tags = {
-    Name      = "${var.basename}_sg_icmp"
-    Terraform = true
+    Name       = "${var.basename}_sg_icmp"
+    Managed_By = "terraform"
   }
 }
 
@@ -122,8 +122,8 @@ resource "aws_security_group" "http" {
   }
 
   tags = {
-    Name      = "${var.basename}_sg_http"
-    Terraform = true
+    Name       = "${var.basename}_sg_http"
+    Managed_By = "terraform"
   }
 }
 
@@ -165,8 +165,8 @@ resource "aws_security_group" "http_alt" {
   }
 
   tags = {
-    Name      = "${var.basename}_sg_http_alt"
-    Terraform = true
+    Name       = "${var.basename}_sg_http_alt"
+    Managed_By = "terraform"
   }
 }
 
@@ -208,8 +208,8 @@ resource "aws_security_group" "https" {
   }
 
   tags = {
-    Name      = "${var.basename}_sg_https"
-    Terraform = true
+    Name       = "${var.basename}_sg_https"
+    Managed_By = "terraform"
   }
 }
 
@@ -251,7 +251,7 @@ resource "aws_security_group" "node_app" {
   }
 
   tags = {
-    Name      = "${var.basename}_sg_node_app"
-    Terraform = true
+    Name       = "${var.basename}_sg_node_app"
+    Managed_By = "terraform"
   }
 }

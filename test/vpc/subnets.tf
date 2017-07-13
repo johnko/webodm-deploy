@@ -44,8 +44,8 @@ resource "aws_subnet" "private_0" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name        = "${var.basename}_priv_sub_0"
-    Managed_By  = "terraform"
+    Name       = "${var.basename}_priv_sub_0"
+    Managed_By = "terraform"
   }
 }
 
@@ -56,8 +56,8 @@ resource "aws_subnet" "private_1" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name        = "${var.basename}_priv_sub_1"
-    Managed_By  = "terraform"
+    Name       = "${var.basename}_priv_sub_1"
+    Managed_By = "terraform"
   }
 }
 */
@@ -161,8 +161,8 @@ resource "aws_route_table" "private_0" {
   }
 
   tags = {
-    Name        = "${var.basename}_priv_rtb_0"
-    Managed_By  = "terraform"
+    Name       = "${var.basename}_priv_rtb_0"
+    Managed_By = "terraform"
   }
 }
 
@@ -180,8 +180,8 @@ resource "aws_route_table" "private_1" {
   }
 
   tags = {
-    Name        = "${var.basename}_priv_rtb_1"
-    Managed_By  = "terraform"
+    Name       = "${var.basename}_priv_rtb_1"
+    Managed_By = "terraform"
   }
 }
 
