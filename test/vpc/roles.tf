@@ -12,7 +12,7 @@ resource "aws_iam_role" "test_role" {
   # XXX FIXME XXX Give this a nice path!!!
   # path = "/"
 
-  assume_role_policy = <<EOF
+  assume_role_policy = <<POLICYEOF
 {
   "Statement": [
     {
@@ -26,7 +26,7 @@ resource "aws_iam_role" "test_role" {
   ],
   "Version": "2012-10-17"
 }
-EOF
+POLICYEOF
 }
 
 resource "aws_iam_instance_profile" "test_profile" {
@@ -37,11 +37,11 @@ resource "aws_iam_instance_profile" "test_profile" {
   # path = "/"
 }
 
-resource "aws_iam_role_policy" "test_policy" {
-  name = "${var.basename}_policy"
+resource "aws_iam_role_policy" "s3_policy" {
+  name = "${var.basename}_s3_policy"
   role = "${aws_iam_role.test_role.id}"
 
-  policy = <<EOF
+  policy = <<POLICYEOF
 {
   "Statement": [
     {
@@ -65,5 +65,5 @@ resource "aws_iam_role_policy" "test_policy" {
   ],
   "Version": "2012-10-17"
 }
-EOF
+POLICYEOF
 }
