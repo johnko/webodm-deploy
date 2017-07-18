@@ -2,8 +2,8 @@
 DynamoDB Table for Terraform Locking
 ******************************************************************************/
 
-resource "aws_dynamodb_table" "tf_locks" {
-  name           = "terraform_locks"
+resource "aws_dynamodb_table" "tf_lock" {
+  name           = "terraform_lock"
   read_capacity  = 20
   write_capacity = 20
   hash_key       = "LockID"
