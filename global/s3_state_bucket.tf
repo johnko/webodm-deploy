@@ -17,8 +17,8 @@ resource "aws_s3_bucket" "tf_state" {
   }
 
   tags {
-    Name        = "s3_tf_state"
-    Managed_By  = "terraform"
+    Name       = "s3_tf_state"
+    Managed_By = "terraform"
   }
 }
 
