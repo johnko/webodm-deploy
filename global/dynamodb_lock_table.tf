@@ -14,7 +14,7 @@ resource "aws_dynamodb_table" "tf_lock" {
   }
 
   tags {
-    Name       = "dynamodb_lock_table"
+    Name       = "dynamodb_tf_lock"
     Managed_By = "terraform"
   }
 }

@@ -12,26 +12,28 @@ resource "aws_vpc" "main" {
   enable_dns_support               = true
 
   tags = {
-    Name       = "${var.basename}_vpc"
-    Managed_By = "terraform"
+    Name        = "vpc-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
 /******************************************************************************
-Tag auto-generated default Route Table
+Tag Auto-Generated Default Route Table
 ******************************************************************************/
 
 resource "aws_default_route_table" "default_rtb" {
   default_route_table_id = "${aws_vpc.main.default_route_table_id}"
 
   tags = {
-    Name       = "${var.basename}_def_rtb"
-    Managed_By = "terraform"
+    Name        = "rtb-def-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
 /******************************************************************************
-Tag auto-generated default Network ACL
+Tag Auto-Generated Default Network ACL
 ******************************************************************************/
 
 # Just tag it but also replace the rules that got cleared out automatically
@@ -80,13 +82,14 @@ resource "aws_default_network_acl" "default_acl" {
   */
 
   tags = {
-    Name       = "${var.basename}_def_acl"
-    Managed_By = "terraform"
+    Name        = "acl-def-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
 /******************************************************************************
-Tag auto-generated default Security Group
+Tag Auto-Generated Default Security Group
 ******************************************************************************/
 
 # Just tag it but also replace the rules that got cleared out automatically
@@ -116,8 +119,9 @@ resource "aws_default_security_group" "default" {
   }
 
   tags = {
-    Name       = "${var.basename}_def_sg"
-    Managed_By = "terraform"
+    Name        = "sg-def-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
@@ -130,8 +134,9 @@ resource "aws_vpc_dhcp_options" "domain_name" {
   domain_name_servers = ["AmazonProvidedDNS"]
 
   tags = {
-    Name       = "${var.basename}_dopt"
-    Managed_By = "terraform"
+    Name        = "dopt-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 

@@ -12,6 +12,11 @@ variable "basename" {
   default     = "webodm"
 }
 
+variable "environment" {
+  description = "Environment to use in tags for all AWS resources"
+  default     = "development"
+}
+
 variable "vpc_cidr_block" {
   description = "IPv4 CIDR block for the VPC"
   default     = "10.200.0.0/16"
