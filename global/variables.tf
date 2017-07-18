@@ -1,5 +1,5 @@
 /******************************************************************************
-
+Input Variables
 ******************************************************************************/
 
 variable "region" {
@@ -8,6 +8,6 @@ variable "region" {
 }
 
 variable "state_bucket_name" {
-  description = "Bucket name to store Terraform state payloads"
+  description = "Name of Terraform state bucket"
   default     = "orthos-test-terraform"
 }

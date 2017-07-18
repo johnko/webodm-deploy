@@ -7,19 +7,19 @@ provider "aws" {
 }
 
 /******************************************************************************
-Terraform State and Locking
+Terraform Remote State and Locking
 ******************************************************************************/
-
-# NOTE:  If you change the bucket name, key or region here, you must update
-# them in all the other terraform files as well.
 
 terraform {
   backend "s3" {
-    bucket  = "orthos-test-terraform"
+    bucket  = "orthos-test-terraform"    # ${var.state_bucket_name}
     key     = "global/terraform.tfstate"
-    region  = "ca-central-1"
     encrypt = true
+    acl     = "private"
 
-    # XXX FIXME XXX Get state locking working next!!!
+    # dynamodb_table = "terraform_locks"
+
+    # Store global in ca-central-1 only (don't assume region)
+    region = "ca-central-1"
   }
 }

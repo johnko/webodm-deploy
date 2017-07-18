@@ -1,8 +1,8 @@
 /******************************************************************************
-S3 Bucket for Terraform State Payloads
+S3 Bucket for Terraform State Storage
 ******************************************************************************/
 
-resource "aws_s3_bucket" "state" {
+resource "aws_s3_bucket" "tf_state" {
   bucket        = "${var.state_bucket_name}"
   acl           = "private"
   force_destroy = false
@@ -11,10 +11,22 @@ resource "aws_s3_bucket" "state" {
   versioning {
     enabled = true
   }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  tags {
+    Name        = "s3_tf_state"
+    Managed_By  = "terraform"
+  }
 }
 
-resource "aws_s3_bucket_policy" "state" {
-  bucket = "${aws_s3_bucket.state.id}"
+# Make sure that we only ever store encrypted stuff here
+# http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+
+resource "aws_s3_bucket_policy" "tf_state" {
+  bucket = "${aws_s3_bucket.tf_state.id}"
 
   policy = <<POLICYEOF
 {

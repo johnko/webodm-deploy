@@ -1,6 +1,11 @@
 /******************************************************************************
-
+Input Variables
 ******************************************************************************/
+
+variable "region" {
+  description = "AWS region in which to launch all AWS resources"
+  default     = "ca-central-1"
+}
 
 variable "basename" {
   description = "Base name to use in tags for all AWS resources"
@@ -10,11 +15,6 @@ variable "basename" {
 variable "vpc_cidr_block" {
   description = "IPv4 CIDR block for the VPC"
   default     = "10.200.0.0/16"
-}
-
-variable "region" {
-  description = "AWS region in which to launch all AWS resources"
-  default     = "ca-central-1"
 }
 
 # Instance type must be Linux, amd64, hvm, ebs, ssd, gp2
