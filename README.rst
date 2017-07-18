@@ -43,46 +43,69 @@ order to do everything from scratch:
 Install Terraform::
 
     # Get core binary
-    terraform_version='0.9.11'
-    wget https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_linux_amd64.zip
-    wget https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_SHA256SUMS.sig
-    wget https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_SHA256SUMS
+    tf_version='0.9.11'
+    wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
+    wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_SHA256SUMS.sig
+    wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_SHA256SUMS
 
     # Verify and extract stuff
-    gpg --verify terraform_${terraform_version}_SHA256SUMS.sig terraform_${terraform_version}_SHA256SUMS
-    sha256 -c <(grep terraform_${terraform_version}_linux_amd64.zip terraform_${terraform_version}_SHA256SUMS)
-    unzip terraform_${terraform_version}_linux_amd64.zip
+    gpg --verify terraform_${tf_version}_SHA256SUMS.sig \
+        terraform_${tf_version}_SHA256SUMS
+    sha256sum -c <(grep terraform_${tf_version}_linux_amd64.zip \
+        terraform_${tf_version}_SHA256SUMS)
+    unzip terraform_${tf_version}_linux_amd64.zip
     sudo cp terraform /usr/local/bin
 
-    # Get AWS provider binary
-    tf_aws_version='0.1.2'
-    wget https://releases.hashicorp.com/terraform-provider-aws/${tf_aws_version}/terraform-provider-aws_${tf_aws_version}_linux_amd64.zip
-    wget https://releases.hashicorp.com/terraform-provider-aws/${tf_aws_version}/terraform-provider-aws_${tf_aws_version}_SHA256SUMS.sig
-    wget https://releases.hashicorp.com/terraform-provider-aws/${tf_aws_version}/terraform-provider-aws_${tf_aws_version}_SHA256SUMS
+
+    # Get provider binary
+    tf_provider='terraform-provider-aws'
+    tf_provider_version='0.1.2'
+    wget https://releases.hashicorp.com/${tf_provider}/${tf_provider_version}/${tf_provider}_${tf_provider_version}_linux_amd64.zip
+    wget https://releases.hashicorp.com/${tf_provider}/${tf_provider_version}/${tf_provider}_${tf_provider_version}_SHA256SUMS.sig
+    wget https://releases.hashicorp.com/${tf_provider}/${tf_provider_version}/${tf_provider}_${tf_provider_version}_SHA256SUMS
 
     # Verify and extract stuff
-    gpg --verify terraform-provider-aws_${tf_aws_version}_SHA256SUMS.sig \
-        terraform-provider-aws_${tf_aws_version}_SHA256SUMS
-    sha256 -c <(grep terraform-provider-aws_${tf_aws_version}_linux_amd64.zip \
-        terraform-provider-aws_${tf_aws_version}_SHA256SUMS)
-    unzip terraform-provider-aws_${tf_aws_version}_linux_amd64.zip
-    sudo cp terraform-provider-aws_v${tf_aws_version}_x4 /usr/local/bin
+    gpg --verify ${tf_provider}_${tf_provider_version}_SHA256SUMS.sig \
+        ${tf_provider}_${tf_provider_version}_SHA256SUMS
+    sha256sum -c <(grep ${tf_provider}_${tf_provider_version}_linux_amd64.zip \
+        ${tf_provider}_${tf_provider_version}_SHA256SUMS)
+    unzip ${tf_provider}_${tf_provider_version}_linux_amd64.zip
+    sudo cp ${tf_provider}_v${tf_provider_version}_x4 /usr/local/bin
+
+
+    # Get provider binary
+    tf_provider='terraform-provider-terraform'
+    tf_provider_version='0.1.0'
+    wget https://releases.hashicorp.com/${tf_provider}/${tf_provider_version}/${tf_provider}_${tf_provider_version}_linux_amd64.zip
+    wget https://releases.hashicorp.com/${tf_provider}/${tf_provider_version}/${tf_provider}_${tf_provider_version}_SHA256SUMS.sig
+    wget https://releases.hashicorp.com/${tf_provider}/${tf_provider_version}/${tf_provider}_${tf_provider_version}_SHA256SUMS
+
+    # Verify and extract stuff
+    gpg --verify ${tf_provider}_${tf_provider_version}_SHA256SUMS.sig \
+        ${tf_provider}_${tf_provider_version}_SHA256SUMS
+    sha256sum -c <(grep ${tf_provider}_${tf_provider_version}_linux_amd64.zip \
+        ${tf_provider}_${tf_provider_version}_SHA256SUMS)
+    unzip ${tf_provider}_${tf_provider_version}_linux_amd64.zip
+    sudo cp ${tf_provider}_v${tf_provider_version}_x4 /usr/local/bin
 
 * https://terraform.io/
 * https://releases.hashicorp.com/terraform/
 * https://releases.hashicorp.com/terraform-provider-aws/
+* https://releases.hashicorp.com/terraform-provider-terraform/
 
 Install Packer::
 
     # Get core binary
-    packer_version='1.0.2'
+    packer_version='1.0.3'
     wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
     wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_SHA256SUMS.sig
     wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_SHA256SUMS
 
     # Verify and extract stuff
-    gpg --verify packer_${packer_version}_SHA256SUMS.sig packer_${packer_version}_SHA256SUMS
-    sha256 -c <(grep packer_${packer_version}_linux_amd64.zip packer_${packer_version}_SHA256SUMS)
+    gpg --verify packer_${packer_version}_SHA256SUMS.sig \
+        packer_${packer_version}_SHA256SUMS
+    sha256sum -c <(grep packer_${packer_version}_linux_amd64.zip \
+        packer_${packer_version}_SHA256SUMS)
     unzip packer_${packer_version}_linux_amd64.zip
     sudo cp packer /usr/local/bin
 
