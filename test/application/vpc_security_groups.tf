@@ -3,7 +3,7 @@ SSH
 ******************************************************************************/
 
 resource "aws_security_group" "ssh" {
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${data.terraform_remote_state.network.vpc_id}"
   name        = "ssh/scp"
   description = "Inbound SSH/SCP"
 
@@ -36,8 +36,9 @@ resource "aws_security_group" "ssh" {
   }
 
   tags = {
-    Name       = "${var.basename}_sg_ssh_scp"
-    Managed_By = "terraform"
+    Name        = "sg-ssh-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
@@ -46,7 +47,7 @@ ICMP (ping)
 ******************************************************************************/
 
 resource "aws_security_group" "icmp" {
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${data.terraform_remote_state.network.vpc_id}"
   name        = "icmp"
   description = "Inbound ICMP"
 
@@ -79,8 +80,9 @@ resource "aws_security_group" "icmp" {
   }
 
   tags = {
-    Name       = "${var.basename}_sg_icmp"
-    Managed_By = "terraform"
+    Name        = "sg-icmp-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
@@ -89,7 +91,7 @@ HTTP
 ******************************************************************************/
 
 resource "aws_security_group" "http" {
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${data.terraform_remote_state.network.vpc_id}"
   name        = "http"
   description = "HTTP"
 
@@ -122,8 +124,9 @@ resource "aws_security_group" "http" {
   }
 
   tags = {
-    Name       = "${var.basename}_sg_http"
-    Managed_By = "terraform"
+    Name        = "sg-http-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
@@ -132,7 +135,7 @@ HTTP Alternate
 ******************************************************************************/
 
 resource "aws_security_group" "http_alt" {
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${data.terraform_remote_state.network.vpc_id}"
   name        = "http alternate"
   description = "HTTP"
 
@@ -165,8 +168,9 @@ resource "aws_security_group" "http_alt" {
   }
 
   tags = {
-    Name       = "${var.basename}_sg_http_alt"
-    Managed_By = "terraform"
+    Name        = "sg-http-alt-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
@@ -175,7 +179,7 @@ HTTPS
 ******************************************************************************/
 
 resource "aws_security_group" "https" {
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${data.terraform_remote_state.network.vpc_id}"
   name        = "https"
   description = "HTTPS"
 
@@ -208,8 +212,9 @@ resource "aws_security_group" "https" {
   }
 
   tags = {
-    Name       = "${var.basename}_sg_https"
-    Managed_By = "terraform"
+    Name        = "sg-https-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
 
@@ -218,7 +223,7 @@ Node Application
 ******************************************************************************/
 
 resource "aws_security_group" "node_app" {
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${data.terraform_remote_state.network.vpc_id}"
   name        = "node_app"
   description = "Node Application"
 
@@ -251,7 +256,8 @@ resource "aws_security_group" "node_app" {
   }
 
   tags = {
-    Name       = "${var.basename}_sg_node_app"
-    Managed_By = "terraform"
+    Name        = "sg-node-${var.basename}"
+    Environment = "${var.environment}"
+    Managed_By  = "terraform"
   }
 }
