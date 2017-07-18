@@ -9,5 +9,5 @@ variable "region" {
 
 variable "state_bucket_name" {
   description = "Name of Terraform state bucket"
-  default     = "cace1-tf-test"
+  default     = "cace1-tf-orthos-test"
 }
