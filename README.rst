@@ -38,6 +38,7 @@ order to do everything from scratch:
 
 * terraform
 * packer (TBD;  for building AMIs from scratch;  amazon-import post-processor)
+* virtualbox (TBD;  for building AMIs from scratch;  amazon-import post-processor)
 * (OPTIONAL) aws-cli
 
 Install Terraform::
@@ -111,6 +112,23 @@ Install Packer::
 
 * https://packer.io/
 * https://releases.hashicorp.com/packer/
+
+Install VirtualBox::
+
+    # Add new repo
+    wget -O - https://www.virtualbox.org/download/oracle_vbox.asc \
+        | sudo apt-key add -
+    wget -O - https://www.virtualbox.org/download/oracle_vbox_2016.asc \
+        | sudo apt-key add -
+    sudo bash -c 'echo "deb http://download.virtualbox.org/virtualbox/debian" \
+        "$(lsb_release --codename --short) contrib" > /etc/apt/sources.list.d/virtualbox.list'
+    sudo apt-get update
+
+    # Add new package
+    sudo apt-get --yes install virtualbox-5.1
+
+* https://www.virtualbox.org/wiki/Linux_Downloads
+* http://download.virtualbox.org/virtualbox
 
 
 Running Terraform
