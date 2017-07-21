@@ -14,31 +14,26 @@ resource "aws_vpc" "main" {
   tags = {
     Name        = "vpc-${var.basename}"
     Environment = "${var.environment}"
-    Managed_By  = "terraform"
+    Managed_By  = "${var.managed_by}"
   }
 }
 
-/******************************************************************************
-Tag Auto-Generated Default Route Table
-******************************************************************************/
+# Just tag the default rtb
 
-resource "aws_default_route_table" "default_rtb" {
+resource "aws_default_route_table" "default" {
   default_route_table_id = "${aws_vpc.main.default_route_table_id}"
 
   tags = {
-    Name        = "rtb-def-${var.basename}"
+    Name        = "vpc-${var.basename}-rtb-def"
     Environment = "${var.environment}"
-    Managed_By  = "terraform"
+    Managed_By  = "${var.managed_by}"
   }
 }
 
-/******************************************************************************
-Tag Auto-Generated Default Network ACL
-******************************************************************************/
+# Just tag the default acl but also replace the rules that got cleared out
+# automatically
 
-# Just tag it but also replace the rules that got cleared out automatically
-
-resource "aws_default_network_acl" "default_acl" {
+resource "aws_default_network_acl" "default" {
   default_network_acl_id = "${aws_vpc.main.default_network_acl_id}"
 
   ingress {
@@ -82,17 +77,14 @@ resource "aws_default_network_acl" "default_acl" {
   */
 
   tags = {
-    Name        = "acl-def-${var.basename}"
+    Name        = "vpc-${var.basename}-acl-def"
     Environment = "${var.environment}"
-    Managed_By  = "terraform"
+    Managed_By  = "${var.managed_by}"
   }
 }
 
-/******************************************************************************
-Tag Auto-Generated Default Security Group
-******************************************************************************/
-
-# Just tag it but also replace the rules that got cleared out automatically
+# Just tag the default sg but also replace the rules that got cleared out
+# automatically
 
 resource "aws_default_security_group" "default" {
   vpc_id = "${aws_vpc.main.id}"
@@ -119,9 +111,9 @@ resource "aws_default_security_group" "default" {
   }
 
   tags = {
-    Name        = "sg-def-${var.basename}"
+    Name        = "vpc-${var.basename}-sg-def"
     Environment = "${var.environment}"
-    Managed_By  = "terraform"
+    Managed_By  = "${var.managed_by}"
   }
 }
 
@@ -134,9 +126,9 @@ resource "aws_vpc_dhcp_options" "domain_name" {
   domain_name_servers = ["AmazonProvidedDNS"]
 
   tags = {
-    Name        = "dopt-${var.basename}"
+    Name        = "vpc-${var.basename}-dopt"
     Environment = "${var.environment}"
-    Managed_By  = "terraform"
+    Managed_By  = "${var.managed_by}"
   }
 }
 
@@ -144,3 +136,9 @@ resource "aws_vpc_dhcp_options_association" "domain_name" {
   vpc_id          = "${aws_vpc.main.id}"
   dhcp_options_id = "${aws_vpc_dhcp_options.domain_name.id}"
 }
+
+/******************************************************************************
+Availability Zones
+******************************************************************************/
+
+data "aws_availability_zones" "all" {}

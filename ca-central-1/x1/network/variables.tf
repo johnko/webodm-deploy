@@ -7,28 +7,43 @@ variable "region" {
   default     = "ca-central-1"
 }
 
+variable "state_bucket_name" {
+  description = "Name of Terraform state bucket"
+  default     = "cace1-tf-marc-orthos"
+}
+
+variable "vpc_cidr_block" {
+  description = "IPv4 CIDR block for the VPC"
+  default     = "10.200.0.0/16"
+}
+
 variable "basename" {
-  description = "Base name to use in tags for all AWS resources"
-  default     = "webodm"
+  description = "Basename tag value to use for all AWS resources"
+  default     = "x1"
 }
 
 variable "environment" {
-  description = "Environment to use in tags for all AWS resources"
+  description = "Environment tag value to use for all AWS resources"
   default     = "development"
 }
 
-variable "hosted_zone_id" {
-  description = "Route53 Hosted Zone ID of the domain to update"
-  default     = "XXXX"
+variable "managed_by" {
+  description = "Managed_By tag value to use for all AWS resources"
+  default     = "terraform"
 }
 
-# Instance type must be Linux, amd64, hvm, ebs, ssd, gp2
+# Instances must be:  Linux, amd64, hvm, ebs, ssd, gp2
 # Current ones are Debian FAI images
+
+variable "bastion_amis" {
+  default = {
+    ca-central-1 = "ami-aad36cce"
+  }
+}
 
 variable "amis" {
   default = {
     ca-central-1 = "ami-aad36cce"
-    us-east-1    = "ami-27072e31"
   }
 }
 

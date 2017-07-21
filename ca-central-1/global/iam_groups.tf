@@ -1,6 +1,8 @@
 /******************************************************************************
-
+IAM Groups and Inline Policies
 ******************************************************************************/
+
+# http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 
 resource "aws_iam_group" "administrators" {
   name = "Administrators"
