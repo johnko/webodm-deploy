@@ -613,6 +613,7 @@ SSH Bastion Hosts
 
 # XXX FIXME XXX Put these behind ASGs???
 
+/*
 resource "aws_instance" "public_bastion_az0" {
   instance_type          = "t2.micro"
   ami                    = "${lookup(var.bastion_amis, var.region)}"
@@ -688,3 +689,4 @@ resource "aws_instance" "protected_bastion_az1" {
     Managed_By  = "${var.managed_by}"
   }
 }
+*/
