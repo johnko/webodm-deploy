@@ -368,12 +368,6 @@ resource "aws_route_table_association" "protected_az1" {
   subnet_id      = "${aws_subnet.protected_az1.id}"
 }
 
-resource "aws_route" "protected_az0_ipv6" {
-  route_table_id              = "${aws_route_table.protected_az0.id}"
-  destination_ipv6_cidr_block = "::/0"
-  egress_only_gateway_id      = "${aws_egress_only_internet_gateway.eigw.id}"
-}
-
 /*
 resource "aws_route" "protected_az0_ipv4" {
   route_table_id         = "${aws_route_table.protected_az0.id}"
@@ -382,8 +376,8 @@ resource "aws_route" "protected_az0_ipv4" {
 }
 */
 
-resource "aws_route" "protected_az1_ipv6" {
-  route_table_id              = "${aws_route_table.protected_az1.id}"
+resource "aws_route" "protected_az0_ipv6" {
+  route_table_id              = "${aws_route_table.protected_az0.id}"
   destination_ipv6_cidr_block = "::/0"
   egress_only_gateway_id      = "${aws_egress_only_internet_gateway.eigw.id}"
 }
@@ -395,6 +389,12 @@ resource "aws_route" "protected_az1_ipv4" {
   nat_gateway_id         = "${aws_nat_gateway.az1.id}"
 }
 */
+
+resource "aws_route" "protected_az1_ipv6" {
+  route_table_id              = "${aws_route_table.protected_az1.id}"
+  destination_ipv6_cidr_block = "::/0"
+  egress_only_gateway_id      = "${aws_egress_only_internet_gateway.eigw.id}"
+}
 
 /******************************************************************************
 Private Route Tables
@@ -430,12 +430,6 @@ resource "aws_route_table_association" "private_az1" {
   subnet_id      = "${aws_subnet.private_az1.id}"
 }
 
-resource "aws_route" "private_az0_ipv6" {
-  route_table_id              = "${aws_route_table.private_az0.id}"
-  destination_ipv6_cidr_block = "::/0"
-  egress_only_gateway_id      = "${aws_egress_only_internet_gateway.eigw.id}"
-}
-
 /*
 resource "aws_route" "private_az0_ipv4" {
   route_table_id         = "${aws_route_table.private_az0.id}"
@@ -444,8 +438,8 @@ resource "aws_route" "private_az0_ipv4" {
 }
 */
 
-resource "aws_route" "private_az1_ipv6" {
-  route_table_id              = "${aws_route_table.private_az1.id}"
+resource "aws_route" "private_az0_ipv6" {
+  route_table_id              = "${aws_route_table.private_az0.id}"
   destination_ipv6_cidr_block = "::/0"
   egress_only_gateway_id      = "${aws_egress_only_internet_gateway.eigw.id}"
 }
@@ -457,6 +451,12 @@ resource "aws_route" "private_az1_ipv4" {
   nat_gateway_id         = "${aws_nat_gateway.az1.id}"
 }
 */
+
+resource "aws_route" "private_az1_ipv6" {
+  route_table_id              = "${aws_route_table.private_az1.id}"
+  destination_ipv6_cidr_block = "::/0"
+  egress_only_gateway_id      = "${aws_egress_only_internet_gateway.eigw.id}"
+}
 
 # XXX FIXME XXX Add descriptions to all security groups???
 

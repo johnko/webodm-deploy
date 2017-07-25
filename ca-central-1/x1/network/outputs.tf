@@ -21,3 +21,31 @@ output "protected_subnets" {
 output "private_subnets" {
   value = ["${aws_subnet.private_az0.id}", "${aws_subnet.private_az1.id}"]
 }
+
+output "public_security_group" {
+  value = "${aws_security_group.public.id}"
+}
+
+output "protected_security_group" {
+  value = "${aws_security_group.protected.id}"
+}
+
+output "private_security_group" {
+  value = "${aws_security_group.private.id}"
+}
+
+output "public_bastion_az0_ip" {
+  value = "${aws_instance.public_bastion_az0.public_ip}"
+}
+
+output "public_bastion_az1_ip" {
+  value = "${aws_instance.public_bastion_az1.public_ip}"
+}
+
+output "protected_bastion_az0_ip" {
+  value = "${aws_instance.protected_bastion_az0.private_ip}"
+}
+
+output "protected_bastion_az1_ip" {
+  value = "${aws_instance.protected_bastion_az1.private_ip}"
+}
