@@ -12,9 +12,9 @@ variable "state_bucket_name" {
   default     = "cace1-tf-marc-orthos"
 }
 
-variable "vpc_cidr_block" {
-  description = "IPv4 CIDR block for the VPC"
-  default     = "10.200.0.0/16"
+variable "managed_by" {
+  description = "Managed_By tag value to use for all AWS resources"
+  default     = "terraform"
 }
 
 variable "basename" {
@@ -27,13 +27,24 @@ variable "environment" {
   default     = "development"
 }
 
-variable "managed_by" {
-  description = "Managed_By tag value to use for all AWS resources"
-  default     = "terraform"
+variable "vpc_cidr_block" {
+  description = "IPv4 CIDR block for the VPC"
+  default     = "10.200.0.0/16"
+}
+
+variable "hosted_zone_id" {
+  description = "Route53 Hosted Zone ID of the domain to update"
+  default     = "XXXX"
 }
 
 # Instances must be:  Linux, amd64, hvm, ebs, ssd, gp2
 # Current ones are Debian FAI images
+
+variable "app_amis" {
+  default = {
+    ca-central-1 = "ami-aad36cce"
+  }
+}
 
 variable "bastion_amis" {
   default = {
@@ -41,23 +52,8 @@ variable "bastion_amis" {
   }
 }
 
-variable "amis" {
+variable "base_amis" {
   default = {
     ca-central-1 = "ami-aad36cce"
   }
 }
-
-variable "key_name" {
-  description = "Desired name of AWS key pair"
-  default     = "terraform"
-}
-
-# variable "public_key_path" {
-#   description = <<DESCRIPTION
-# Path to the SSH public key to be used for authentication.
-# Ensure this keypair is added to your local SSH agent so provisioners can
-# connect.
-# Example: ~/.ssh/terraform.pub
-# DESCRIPTION
-# }
-
